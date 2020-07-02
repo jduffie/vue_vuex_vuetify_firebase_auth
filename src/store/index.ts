@@ -24,11 +24,13 @@ export default new Vuex.Store({
           .createUserWithEmailAndPassword(payload.email, payload.password)
           .then(
               userCredential => {
-                const newUser = {
-                  id: userCredential.user.uid,
-                  registeredMeetups: []
+                if (userCredential.user !== null) {
+                  const newUser = {
+                    id: userCredential.user.uid,
+                    registeredMeetups: []
+                  }
+                  commit('setUser', newUser)
                 }
-                commit('setUser', newUser)
               },
           )
           .catch(error => {

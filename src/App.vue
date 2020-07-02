@@ -121,42 +121,8 @@
             source: String
         },
         data: () => ({
-            drawer: null,
-
-            drawerItems: [
-                {icon: 'mdi-calendar', text: 'View Meetups', link: '/meetups' },
-                {icon: 'mdi-table-edit', text: 'Organize Meetup', link: '/meetups/new'},
-                {icon: 'mdi-contacts', text: 'Contacts', link: '/about'},
-                {icon: 'mdi-history', text: 'History', link: '/about'},
-                {
-                    icon: 'mdi-chevron-up',
-                    'icon-alt': 'mdi-chevron-down',
-                    text: 'Labels',
-                    model: true,
-                    children: [
-                        {icon: 'mdi-plus', text: 'Create label', link: '/about'},
-                    ],
-                },
-                {
-                    icon: 'mdi-chevron-up',
-                    'icon-alt': 'mdi-chevron-down',
-                    text: 'More',
-                    model: false,
-                    children: [
-                        {text: 'Import', link: '/about'},
-                        {text: 'Export', link: '/about'},
-                        {text: 'Print', link: '/about'},
-                        {text: 'Undo changes', link: '/about'},
-                        {text: 'Other contacts', link: '/about'},
-                    ],
-                },
-                {icon: 'mdi-cog', text: 'Settings', link: '/about'},
-                {icon: 'mdi-message', text: 'Send feedback', link: '/about'},
-                {icon: 'mdi-help-circle', text: 'Help', link: '/about'},
-                {icon: 'mdi-cellphone-link', text: 'App downloads', link: '/about'}
-            ],
-        }
-        ),
+            drawer: null
+        }),
         computed: {
             bannerItems() {
                 let items = [
@@ -211,10 +177,9 @@
                 }
                 return items
             },
-
-            userIsAuthenticated() {
+            userIsAuthenticated(): boolean {
                 return this.$store.getters.user !== null &&
-                        this.$store.getters.user !== undefined
+                       this.$store.getters.user !== undefined
             }
         }
     });
