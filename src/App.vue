@@ -129,9 +129,6 @@
             drawerItems: [
                 {icon: 'mdi-calendar', text: 'View Meetups', link: '/meetups' },
                 {icon: 'mdi-table-edit', text: 'Organize Meetup', link: '/meetups/new'},
-                {icon: 'mdi-account-box', text: 'Profile', link: '/profile'},
-                {icon: 'mdi-account-plus', text: 'Sign up', link: '/signup'},
-                {icon: 'mdi-account-box-outline', text: 'Sign in', link: '/signin'},
                 {icon: 'mdi-contacts', text: 'Contacts', link: '/about'},
                 {icon: 'mdi-history', text: 'History', link: '/about'},
                 {
