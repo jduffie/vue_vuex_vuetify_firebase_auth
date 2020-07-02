@@ -6,7 +6,9 @@
                 v-model="drawer"
         >
             <v-list dense>
-                <template v-for="item in items">
+                <template
+                        v-for="item in drawerItems"
+                >
                     <v-row
                             :key="item.heading"
                             align="center"
@@ -45,6 +47,8 @@
                                 :key="i"
                                 link
                                 v-for="(child, i) in item.children"
+                                router
+                                v-bind:to="child.link"
                         >
                             <v-list-item-action v-if="child.icon">
                                 <v-icon>{{ child.icon }}</v-icon>
@@ -60,6 +64,8 @@
                             :key="item.text"
                             link
                             v-else
+                            router
+                            v-bind:to="item.link"
                     >
                         <v-list-item-action>
                             <v-icon>{{ item.icon }}</v-icon>
@@ -81,7 +87,7 @@
                 dense
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-sm-and-up"></v-app-bar-nav-icon>
-            <v-toolbar-title>Dev Meetup</v-toolbar-title>
+            <v-toolbar-title><router-link to="/" tag="span" style="cursor: pointer">Dev Meetup</router-link></v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-xs-only" >
                 <v-btn text v-for="item in bannerItems" :key="item.text">
@@ -92,32 +98,8 @@
         </v-app-bar>
 
         <v-main>
-            <v-container
-                    class="fill-height"
-                    fluid
-            >
-                <v-row
-                        align="center"
-                        justify="center"
-                >
-                    <v-col class="text-center">
-                        <v-tooltip left>
-                            <template v-slot:activator="{ on }">
-                                <v-btn
-                                        :href="source"
-                                        icon
-                                        large
-                                        target="_blank"
-                                        v-on="on"
-                                >
-                                    <v-icon large>mdi-code-tags</v-icon>
-                                </v-btn>
-                            </template>
-                            <span>Source</span>
-                        </v-tooltip>
-                    </v-col>
-                </v-row>
-            </v-container>
+          <router-view></router-view>
+
         </v-main>
         <v-footer
                 app
@@ -144,22 +126,21 @@
                 {icon: 'mdi-account-plus', text: 'Sign up'},
                 {icon: 'mdi-account-box-outline', text: 'Sign in'}
             ],
-            items: [
-                {icon: 'mdi-calendar', text: 'View Meetups'},
-                {icon: 'mdi-table-edit', text: 'Organize Meetup'},
-                {icon: 'mdi-account-box', text: 'Profile'},
-                {icon: 'mdi-account-plus', text: 'Sign up'},
-                {icon: 'mdi-account-box-outline', text: 'Sign in'},
-                {icon: 'mdi-contacts', text: 'Contacts'},
-                {icon: 'mdi-history', text: 'Frequently contacted'},
-                {icon: 'mdi-content-copy', text: 'Duplicates'},
+            drawerItems: [
+                {icon: 'mdi-calendar', text: 'View Meetups', link: '/meetups' },
+                {icon: 'mdi-table-edit', text: 'Organize Meetup', link: '/meetups/new'},
+                {icon: 'mdi-account-box', text: 'Profile', link: '/profile'},
+                {icon: 'mdi-account-plus', text: 'Sign up', link: '/signup'},
+                {icon: 'mdi-account-box-outline', text: 'Sign in', link: '/signin'},
+                {icon: 'mdi-contacts', text: 'Contacts', link: '/about'},
+                {icon: 'mdi-history', text: 'History', link: '/about'},
                 {
                     icon: 'mdi-chevron-up',
                     'icon-alt': 'mdi-chevron-down',
                     text: 'Labels',
                     model: true,
                     children: [
-                        {icon: 'mdi-plus', text: 'Create label'},
+                        {icon: 'mdi-plus', text: 'Create label', link: '/about'},
                     ],
                 },
                 {
@@ -168,18 +149,17 @@
                     text: 'More',
                     model: false,
                     children: [
-                        {text: 'Import'},
-                        {text: 'Export'},
-                        {text: 'Print'},
-                        {text: 'Undo changes'},
-                        {text: 'Other contacts'},
+                        {text: 'Import', link: '/about'},
+                        {text: 'Export', link: '/about'},
+                        {text: 'Print', link: '/about'},
+                        {text: 'Undo changes', link: '/about'},
+                        {text: 'Other contacts', link: '/about'},
                     ],
                 },
-                {icon: 'mdi-cog', text: 'Settings'},
-                {icon: 'mdi-message', text: 'Send feedback'},
-                {icon: 'mdi-help-circle', text: 'Help'},
-                {icon: 'mdi-cellphone-link', text: 'App downloads'},
-                {icon: 'mdi-keyboard', text: 'Go to the old version'},
+                {icon: 'mdi-cog', text: 'Settings', link: '/about'},
+                {icon: 'mdi-message', text: 'Send feedback', link: '/about'},
+                {icon: 'mdi-help-circle', text: 'Help', link: '/about'},
+                {icon: 'mdi-cellphone-link', text: 'App downloads', link: '/about'}
             ],
         })
     });
