@@ -90,7 +90,9 @@
             <v-toolbar-title><router-link to="/" tag="span" style="cursor: pointer">Dev Meetup</router-link></v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-xs-only" >
-                <v-btn text v-for="item in bannerItems" :key="item.text">
+                <v-btn text v-for="item in bannerItems" :key="item.text"
+                       router
+                       v-bind:to="item.link">
                     <v-icon left>{{item.icon}}</v-icon>
                   {{item.text}}
                 </v-btn>
@@ -121,10 +123,10 @@
         data: () => ({
             drawer: null,
             bannerItems: [
-                {icon: 'mdi-calendar', text: 'View Meetups'},
-                {icon: 'mdi-account-box', text: 'Profile'},
-                {icon: 'mdi-account-plus', text: 'Sign up'},
-                {icon: 'mdi-account-box-outline', text: 'Sign in'}
+                {icon: 'mdi-calendar', text: 'View Meetups', link: '/meetups'},
+                {icon: 'mdi-account-box', text: 'Profile', link: '/profile'},
+                {icon: 'mdi-account-plus', text: 'Sign up', link: '/signup'},
+                {icon: 'mdi-account-box-outline', text: 'Sign in', link: '/signin'}
             ],
             drawerItems: [
                 {icon: 'mdi-calendar', text: 'View Meetups', link: '/meetups' },
